@@ -2,9 +2,8 @@
 
 namespace App\Entity;
 
+use App\Enum\TypeUtilisateur;
 use App\Repository\UsersRepository;
-use App\enum\typeUtilisateur;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: UsersRepository::class)]
@@ -24,10 +23,10 @@ class Users
     #[ORM\Column(length: 255)]
     private ?string $mot_de_passe = null;
 
-    #[ORM\Column(enumType: typeUtilisateur::class)]
-    private ?typeUtilisateur $type = null;
+    #[ORM\Column(enumType: TypeUtilisateur::class)]
+    private ?TypeUtilisateur $type = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[ORM\Column]
     private ?\DateTime $date_creation = null;
 
     public function getId(): ?int
@@ -71,12 +70,12 @@ class Users
         return $this;
     }
 
-    public function getType(): ?typeUtilisateur
+    public function getType(): ?TypeUtilisateur
     {
         return $this->type;
     }
 
-    public function setType(typeUtilisateur $type): static
+    public function setType(TypeUtilisateur $type): static
     {
         $this->type = $type;
 
